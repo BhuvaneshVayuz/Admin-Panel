@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import useTitleUpdater from '../hooks/titleUpdate';
 
 const Navbar = () => {
+    useTitleUpdater()
     return (
         <>
             <nav className="bg-gray-800 text-white p-4">
