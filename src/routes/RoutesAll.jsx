@@ -11,26 +11,29 @@ import AddStylingPage from '../pages/stylingPages/AddStylingPage';
 import EditStylingPage from '../pages/stylingPages/EditStylingPage';
 import StylingTablePage from '../pages/stylingPages/StylingTablePage';
 import ViewStylingPage from '../pages/stylingPages/ViewStylingPage';
+import Wrapper from '../pages/Wrapper';
 
 const RoutesAll = [
     <>
-        <Route path="/" element={<HomePage />} />
+        <Route path='/' element={<Navbar />}>
+            <Route index element={<HomePage />} />
 
-        <Route path='/form-validations' element={<Navbar />}>
-            <Route index element={<FormTablePage />} />
-            <Route path='add' element={<AddFormPage />} />
-            <Route path='view/:id' element={<ViewFormPage />} />
-            <Route path='edit/:id' element={<EditFormPage />} />
+            <Route path='/form-validations' element={<Wrapper />}>
+                <Route index element={<FormTablePage />} />
+                <Route path='add' element={<AddFormPage />} />
+                <Route path='view/:id' element={<ViewFormPage />} />
+                <Route path='edit/:id' element={<EditFormPage />} />
+            </Route>
+
+            <Route path='/styling-configs' element={<Wrapper />}>
+                <Route index element={<StylingTablePage />} />
+                <Route path='add' element={<AddStylingPage />} />
+                <Route path='view/:id' element={<ViewStylingPage />} />
+                <Route path='edit/:id' element={<EditStylingPage />} />
+            </Route>
+
+            <Route path='*' element={<PageNotFound />} />
         </Route>
-
-        <Route path='/styling-configs' element={<Navbar />}>
-            <Route index element={<StylingTablePage />} />
-            <Route path='add' element={<AddStylingPage />} />
-            <Route path='view/:id' element={<ViewStylingPage />} />
-            <Route path='edit/:id' element={<EditStylingPage />} />
-        </Route>
-
-        <Route path='*' element={<PageNotFound />} />
     </>
 ];
 

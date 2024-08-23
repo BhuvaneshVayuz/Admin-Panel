@@ -28,39 +28,66 @@ const ViewStylingPage = () => {
                 <h1>Loading...</h1>
             ) : (
                 <div className="p-4 max-w-3xl mx-auto">
-                    <h1 className="text-2xl font-semibold mb-4">View Styling Configuration</h1>
-                    <div className="border border-gray-300 p-4 rounded shadow-md">
-                        <p><strong>URL:</strong> {stylingConfig?.url}</p>
+                    <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                        View Styling Configuration
+                    </h1>
+                    <div className="border border-gray-300 p-4 rounded shadow-md bg-white dark:bg-gray-800 dark:border-gray-600">
+                        <p className="text-gray-900 dark:text-gray-100">
+                            <strong>URL:</strong> {stylingConfig?.url}
+                        </p>
 
-                        <h2 className="text-lg font-medium mt-4">Bundles</h2>
+                        <h2 className="text-lg font-medium mt-4 text-gray-900 dark:text-gray-100">
+                            Bundles
+                        </h2>
                         {stylingConfig?.bundles?.length > 0 ? (
                             stylingConfig.bundles.map((bundle, index) => (
-                                <div key={index} className="border border-gray-300 p-2 mt-2 rounded shadow-sm">
-                                    <p><strong>Path:</strong> {bundle.path}</p>
-                                    <p><strong>Component:</strong> {bundle.component}</p>
-                                    <p><strong>Heading:</strong> {bundle.heading}</p>
-                                    <p><strong>Logo:</strong> {bundle.logo}</p>
+                                <div
+                                    key={index}
+                                    className="border border-gray-300 p-2 mt-2 rounded shadow-sm bg-white dark:bg-gray-700 dark:border-gray-600"
+                                >
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Path:</strong> {bundle.path}
+                                    </p>
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Component:</strong> {bundle.component}
+                                    </p>
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Heading:</strong> {bundle.heading}
+                                    </p>
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Logo:</strong> {bundle.logo}
+                                    </p>
                                 </div>
                             ))
                         ) : (
-                            <p>No bundles available.</p>
+                            <p className="text-gray-500 dark:text-gray-400">No bundles available.</p>
                         )}
-                        <h2 className="text-lg font-medium mt-4">Form Ids</h2>
+
+                        <h2 className="text-lg font-medium mt-4 text-gray-900 dark:text-gray-100">
+                            Form Ids
+                        </h2>
                         {stylingConfig?.formIds?.length > 0 ? (
                             stylingConfig.formIds.map((formId, index) => (
-                                <div key={index} className="border border-gray-300 p-2 mt-2 rounded shadow-sm">
-                                    <p><strong>Name:</strong> {formId.name}</p>
-                                    <p><strong>Id:</strong> {formId.id}</p>
+                                <div
+                                    key={index}
+                                    className="border border-gray-300 p-2 mt-2 rounded shadow-sm bg-white dark:bg-gray-700 dark:border-gray-600"
+                                >
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Name:</strong> {formId.name}
+                                    </p>
+                                    <p className="text-gray-900 dark:text-gray-100">
+                                        <strong>Id:</strong> {formId.id}
+                                    </p>
                                 </div>
                             ))
                         ) : (
-                            <p>No form ids available.</p>
+                            <p className="text-gray-500 dark:text-gray-400">No form ids available.</p>
                         )}
 
                         <div className="mt-4">
                             <Link
                                 to={`/styling-configs/edit/${stylingConfig?.id}`}
-                                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-700"
                             >
                                 Edit
                             </Link>
