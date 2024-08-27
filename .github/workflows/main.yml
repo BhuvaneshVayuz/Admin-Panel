@@ -1,4 +1,4 @@
-name: Deploy to S3
+name: VAYUZ Bhuvanesh S3 deployment testing
 
 on:
   push:
