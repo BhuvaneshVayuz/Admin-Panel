@@ -16,14 +16,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18 # Use the 
+          node-version: 18 
       
       - name: Install dependencies
         run: npm install
       
       - name: Build bundle
         run: npm run build
-      
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          
       - name: Upload to S3
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
