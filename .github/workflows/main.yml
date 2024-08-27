@@ -1,35 +1,71 @@
-name: VAYUZ MF deploy on s3
+# name: VAYUZ MF deploy on s3
 
-on: 
-push:
-branch:
-- master
+# on: 
+# push:
+# branch:
+# - master
+
+# jobs:
+# deploy:
+# runs-on: ubuntu-latest
+
+# steps:
+# - name: Checkout
+# uses: actions/checkout@v2
+# - name: NodeJs Setup 
+# uses: actions/setup-node@v2
+# with: 
+# node-version: "18.12.1"
+
+# - name: Dependency Installation 
+# run: npm install 
+
+# - name: App Build
+# run: npm run build
+
+
+# - name: Configure AWS Credentials
+# uses: aws-actions/configure-aws-credentials@vl
+# with:
+# aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+# aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+# aws-region: us-east-1
+
+# - name: Deploy to AWS S3
+# run: aws s3 sync build s3://anarock-staging --delete
+
+
+
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - master # Change this to your main branch 
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
-
-steps:
-- name: Checkout
-uses: actions/checkout@v2
-- name: NodeJs Setup 
-uses: actions/setup-node@v2
-with: 
-node-version: "18.12.1"
-
-- name: Dependency Installation 
-run: npm install 
-
-- name: App Build
-run: npm run build
-
-
-- name: Configure AWS Credentials
-uses: aws-actions/configure-aws-credentials@vl
-with:
-aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-aws-region: us-east-1
-
-- name: Deploy to AWS S3
-run: aws s3 sync build s3://anarock-staging --delete
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18 # Use the Node.js version you need
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build bundle
+        run: npm run build
+      
+      - name: Upload to S3
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws s3 cp public/ s3://anarock-staging/mf/ --recursive --exclude "node_modules/*" --acl public-read
+        env:
+          AWS_DEFAULT_REGION: us-east-1 # Change this to your desired region
